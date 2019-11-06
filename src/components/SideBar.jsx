@@ -23,7 +23,7 @@ const SideBar = () => {
     const style = useSpring({
         transform: isFullScreen ? "translate(0px, 0px)" : "translate(-300px, 0px)",
         flexBasis: isFullScreen ? '300px' : '0px',
-        width: isFullScreen ? 300 : 0,
+        width: isFullScreen ? 300 : 0
     });
 
     return <SideBarWrapper style={style}>Side Bar</SideBarWrapper>

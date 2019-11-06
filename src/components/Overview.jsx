@@ -1,9 +1,11 @@
 import React, { useCallback, useContext } from "react";
-import { Button, Col } from "antd";
+import { Button, Card, Col, Row } from "antd";
 import styled from "styled-components";
 import { FullScreenContext } from "../contexts/FullScreenContext";
+import CardContent1 from "./CardContent1";
+import CardContent2 from "./CardContent2";
 
-const AnimatedCol2 = styled(Col)`
+const Container = styled(Col)`
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -15,6 +17,16 @@ const AnimatedCol2 = styled(Col)`
   box-sizing: border-box;
 `;
 
+const CardContainer = styled(Row)`
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+`;
+
+const MaxCard = styled(Card)`
+  width: 100%;
+`;
+
 const Overview = () => {
   const { isFullScreen, setIsFullScreen } = useContext(FullScreenContext);
 
@@ -23,11 +35,26 @@ const Overview = () => {
   }, [isFullScreen, setIsFullScreen]);
 
   return (
-    <AnimatedCol2>
-      <Button type="primary" onClick={handleToggleSidebar}>
-        Toggle Side Bar
-      </Button>
-    </AnimatedCol2>
+    <Container>
+      <CardContainer gutter={10}>
+        <Col md={12}>
+          <MaxCard title="Card 1">
+            <CardContent1 />
+            <Button type="primary" onClick={handleToggleSidebar}>
+              Toggle Side Bar
+            </Button>
+          </MaxCard>
+        </Col>
+        <Col md={12}>
+          <MaxCard title="Card 2">
+            <CardContent2 />
+            <Button type="primary" onClick={handleToggleSidebar}>
+              Toggle Side Bar
+            </Button>
+          </MaxCard>
+        </Col>
+      </CardContainer>
+    </Container>
   );
 };
 
