@@ -2,8 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { Button, Card, Col, Row } from "antd";
 import styled from "styled-components";
 import { FullScreenContext } from "../contexts/FullScreenContext";
-import CardContent1 from "./CardContent1";
-import CardContent2 from "./CardContent2";
+import AwesomeCard from "./AwesomeCard";
 
 const Container = styled(Col)`
   height: 100vh;
@@ -25,33 +24,39 @@ const CardContainer = styled(Row)`
 
 const MaxCard = styled(Card)`
   width: 100%;
+  height: 300px;
 `;
 
 const Overview = () => {
-  const { isFullScreen, setIsFullScreen } = useContext(FullScreenContext);
+  const { fullScreenId, enterFullScreen, exitFullScreen } = useContext(FullScreenContext);
 
-  const handleToggleSidebar = useCallback(() => {
-    setIsFullScreen(!isFullScreen);
-  }, [isFullScreen, setIsFullScreen]);
+  const handleMaximizeChart1 = useCallback(() => {
+    if (fullScreenId === 'chart-01') {
+      exitFullScreen();
+      return;
+    }
+    enterFullScreen('chart-01');
+  }, [fullScreenId, enterFullScreen, exitFullScreen]);
+  const handleMaximizeChart2 = useCallback(() => {
+    if (fullScreenId === 'chart-02') {
+      exitFullScreen();
+      return;
+    }
+    enterFullScreen('chart-02');
+  }, [fullScreenId, enterFullScreen, exitFullScreen]);
 
   return (
     <Container>
       <CardContainer gutter={10}>
         <Col md={12}>
-          <MaxCard title="Card 1">
-            <CardContent1 />
-            <Button type="primary" onClick={handleToggleSidebar}>
-              Toggle Side Bar
-            </Button>
-          </MaxCard>
+          <AwesomeCard title="Awesome Card 1" cardId="awesome-card-01">
+            <h1>This is the first card!</h1>
+          </AwesomeCard>
         </Col>
         <Col md={12}>
-          <MaxCard title="Card 2">
-            <CardContent2 />
-            <Button type="primary" onClick={handleToggleSidebar}>
-              Toggle Side Bar
-            </Button>
-          </MaxCard>
+          <AwesomeCard title="Awesome Card 2" cardId="awesome-card-02">
+            <h1>This is the second card!</h1>
+          </AwesomeCard>
         </Col>
       </CardContainer>
     </Container>

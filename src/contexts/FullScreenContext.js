@@ -1,13 +1,17 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState, useMemo } from 'react';
 
 export const FullScreenContext = createContext();
 
 export const FullScreenProvider = ({ children }) => {
-    const [isFullScreen, setIsFullScreen] = useState(true);
+    const [fullScreenId, setFullScreenId] = useState('');
     const [isTransitioningToFullScreen, setIsTransitioningToFullScreen] = useState(false);
-    const setIsFullScreenCallback = useCallback((value) => {
-        setIsFullScreen(value);
-    }, [setIsFullScreen]);
+    const isFullScreen = useMemo(() => fullScreenId.length > 0, [fullScreenId]);
+    const enterFullScreen = useCallback((value) => {
+        setFullScreenId(value);
+    }, [setFullScreenId]);
+    const exitFullScreen = useCallback((value) => {
+        setFullScreenId('');
+    }, [setFullScreenId]);
     
     useEffect(() => {
         setIsTransitioningToFullScreen(true);
@@ -22,9 +26,11 @@ export const FullScreenProvider = ({ children }) => {
 
     return (
         <FullScreenContext.Provider value={{
+            fullScreenId,
             isFullScreen,
             isTransitioningToFullScreen,
-            setIsFullScreen: setIsFullScreenCallback,
+            enterFullScreen,
+            exitFullScreen,
         }}>
             {children}
         </FullScreenContext.Provider>

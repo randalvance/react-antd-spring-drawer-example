@@ -21,9 +21,9 @@ SideBarWrapper = animated(SideBarWrapper);
 const SideBar = () => {
     const { isFullScreen } = useContext(FullScreenContext);
     const style = useSpring({
-        transform: isFullScreen ? "translate(0px, 0px)" : "translate(-300px, 0px)",
-        flexBasis: isFullScreen ? '300px' : '0px',
-        width: isFullScreen ? 300 : 0
+        transform: isFullScreen ? "translate(-300px, 0px)" : "translate(0px, 0px)",
+        flexBasis: isFullScreen ? '0' : '300px',
+        width: isFullScreen ? 0 : 300
     });
 
     return <SideBarWrapper style={style}>Side Bar</SideBarWrapper>
