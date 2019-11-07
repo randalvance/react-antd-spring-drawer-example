@@ -6,7 +6,7 @@ import { FullScreenContext } from '../contexts/FullScreenContext';
 
 let SideBarWrapper = styled(Col)`
   height: 100vh;
-  background: red;
+  background: #1a1a1a;
   display: flex;
   justify-content: center;
   align-items: center;
